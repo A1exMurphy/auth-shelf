@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import React from "react";
 
@@ -28,14 +29,16 @@ function ShelfPage() {
       type: "ADD_item",
       payload: { description: description, image_url: imageLink },
     });
+    setDescription('');
+    setImageLink('');
   };
 
   return (
     <div className="container">
       <h2>Shelf</h2>
       <form>
-        <input type="text" placeholder="Enter item description" />
-        <input type="text" placeholder="Paste image link" />
+        <input type="text" placeholder="Enter item description" onChange={(e) => setDescription(e.target.value)} value={description}/>
+        <input type="text" placeholder="Paste image link" onChange={(e) => setImageLink(e.target.value)} value={imageLink}/>
         <button onClick={(e) => addItem(e)}>Add Item</button>
       </form>
       <ul>
