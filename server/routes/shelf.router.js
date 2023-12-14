@@ -27,8 +27,29 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  // endpoint functionality
-});
+  console.log('start POST query');
+
+  const insertShelfItem = 
+    `
+    INSERT INTO "item" (
+      "description",
+      "image_url",
+      "user_id")
+      VALUES ($1, $2, $3);
+    `
+    shelfItemValues = [req.body.description, req.body.image_url, req.body.user_id];
+    console.log(shelfItemValues, "item to be POSTed");
+
+    pool.query(insertShelfItem, shelfItemValues)
+    .then((result) => {
+      // console.log(result.rows, "query response to GET")
+      res.sendStatus(201)
+    })
+    .catch((err) => {
+      console.log(err, "error in POST query")
+      res.sendStatus(500)
+    })
+    });
 
 /**
  * Delete an item if it's something the logged in user added
