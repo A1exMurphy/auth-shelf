@@ -53,8 +53,26 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-  // endpoint functionality
-});
+  console.log('start GET query');
+
+  const submitDeleteItem = 
+    `
+    DELETE FROM "item" 
+      WHERE "item"."id" = $1 AND "item"."user_id" = $2;
+    `
+    itemToDeleteValues = [req.params.id, req.user.id]
+    console.log(itemToDeleteValues, "item ID and user ID");
+
+    pool.query(submitDeleteItem, itemToDeleteValues)
+    .then((result) => {
+      // console.log(result.rows, "query response to GET")
+      res.send(result.rows)
+    })
+    .catch((err) => {
+      console.log(err, "error in GET query")
+      res.sendStatus(500)
+    })
+    });
 
 /**
  * Update an item if it's something the logged in user added
