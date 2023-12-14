@@ -46,14 +46,14 @@ function* addItem(action) {
 }
 
 function* deleteItem(action) {
+
   try{
     axios({
       method: 'DELETE',
       url: `/api/shelf/${action.payload}`
     }) 
-    yield put({
-      type: 'FETCH_Items'
-    })
+    yield fetchItems()
+    
   } catch(error) {
     console.log('Error in POST route', error)
   }

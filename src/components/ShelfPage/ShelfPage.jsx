@@ -11,7 +11,7 @@ function ShelfPage() {
 
   useEffect(() => {
     fetchItems();
-  }, []);
+  }, [shelfItems]);
 
   const fetchItems = () => {
     // console.log("dispatch FETCH_Items")
@@ -33,6 +33,14 @@ function ShelfPage() {
     setImageLink('');
   };
 
+  const deleteItem = ({item}) => {
+    console.log(item, "item from  delete button")
+    dispatch({
+      type: "DELETE_item",
+      payload: `${item.id}`
+    })
+  }
+
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -48,6 +56,7 @@ function ShelfPage() {
               <div key={item.id} className="itemObject">
                 <li>{item.description}</li>
                 <img src={item.image_url} />
+                <button onClick={() => deleteItem({item})}>Remove</button>
               </div>
             );
           })}
