@@ -15,3 +15,11 @@ CREATE TABLE "item" (
     "image_url" VARCHAR (2083),
     "user_id" INT REFERENCES "user"
 );
+
+INSERT INTO "item" (
+	"description",
+	"image_url",
+	"user_id")
+	VALUES ('my favorite thing in the whole wide world', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/57/The_Legend_of_Zelda_Ocarina_of_Time.jpg/220px-The_Legend_of_Zelda_Ocarina_of_Time.jpg', 1);
+
+SELECT * FROM "item";
