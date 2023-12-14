@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-
-
-
 import React from 'react';
 
 function ShelfPage() {
@@ -18,13 +15,16 @@ function ShelfPage() {
   const fetchItems = () => {
     // console.log("dispatch FETCH_Items")
     dispatch({
-      type: "FETCH_Items"
-  });
+      type: "FETCH_Items" 
+  });   
 
   }
   return (
     <div className="container">
       <h2>Shelf</h2>
+      <form>
+        
+      </form>
       <ul>
       {shelfItems && shelfItems.map((item) => {
         return(
