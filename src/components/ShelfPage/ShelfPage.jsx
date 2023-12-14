@@ -41,7 +41,7 @@ function ShelfPage() {
         <input type="text" placeholder="Paste image link" onChange={(e) => setImageLink(e.target.value)} value={imageLink}/>
         <button onClick={(e) => addItem(e)}>Add Item</button>
       </form>
-      <ul>
+      <ul className="gallery">
         {shelfItems &&
           shelfItems.map((item) => {
             return (
