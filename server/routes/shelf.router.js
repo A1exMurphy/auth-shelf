@@ -27,8 +27,6 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-  console.log('start POST query');
-
   const insertShelfItem = 
     `
     INSERT INTO "item" (
@@ -37,7 +35,7 @@ router.post('/', (req, res) => {
       "user_id")
       VALUES ($1, $2, $3);
     `
-    shelfItemValues = [req.body.description, req.body.image_url, req.body.user_id];
+    shelfItemValues = [req.body.description, req.body.image_url, req.user.id];
     console.log(shelfItemValues, "item to be POSTed");
 
     pool.query(insertShelfItem, shelfItemValues)
