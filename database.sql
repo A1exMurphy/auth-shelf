@@ -23,3 +23,6 @@ INSERT INTO "item" (
 	VALUES ('my favorite thing in the whole wide world', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/57/The_Legend_of_Zelda_Ocarina_of_Time.jpg/220px-The_Legend_of_Zelda_Ocarina_of_Time.jpg', 1);
 
 SELECT * FROM "item";
+
+DELETE FROM "item" 
+	WHERE "item"."id" = $1 AND "item"."user_id" = $2;
