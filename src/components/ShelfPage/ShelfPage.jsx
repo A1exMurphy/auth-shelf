@@ -23,7 +23,9 @@ function ShelfPage() {
     <div className="container">
       <h2>Shelf</h2>
       <form>
-        
+        <input type="text" placeholder='Enter item description'/>
+        <input type="text"  placeholder='Paste image link'/>
+        <button>Add Item</button>
       </form>
       <ul>
       {shelfItems && shelfItems.map((item) => {
