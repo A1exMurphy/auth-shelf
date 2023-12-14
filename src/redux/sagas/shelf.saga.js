@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchItems() {
-    console.log('in fetchItems generator')
+    // console.log('in fetchItems generator')
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -15,7 +15,7 @@ function* fetchItems() {
     // If a Items is logged in, this will return their information
     // from the server session (req.Items)
     const response = yield axios.get('/api/shelf', config);
-    console.log(response.data, "this is the response from GET");
+    // console.log(response.data, "this is the response from GET");
 
     // now that the session has given us a Items object
     // with an id and Itemsname set the client-side Items object to let

@@ -8,7 +8,7 @@ import React from 'react';
 
 function ShelfPage() {
   const shelfItems = useSelector(store => store.shelf)
-  console.log(shelfItems, typeof shelfItems, "shelfItems from store")
+  // console.log(shelfItems, typeof shelfItems, "shelfItems from store")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function ShelfPage() {
   }, []);
 
   const fetchItems = () => {
-    console.log("dispatch FETCH_Items")
+    // console.log("dispatch FETCH_Items")
     dispatch({
       type: "FETCH_Items"
   });
