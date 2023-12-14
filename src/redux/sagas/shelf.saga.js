@@ -34,7 +34,7 @@ function* addItem(action) {
   try { 
     axios({
       method: 'POST',
-      url: `/api/shelf/${action.payload.id}`,
+      url: `/api/shelf/`,
       data: action.payload
     })
     yield put({
