@@ -38,7 +38,7 @@ function* addItem(action) {
       data: action.payload
     })
     yield put({
-      type: 'FETCH_Items'
+      type: 'FETCH_ITEMS'
     })
   } catch(error) {
     console.log('Error in POST route', error)
@@ -52,17 +52,18 @@ function* deleteItem(action) {
       method: 'DELETE',
       url: `/api/shelf/${action.payload}`
     }) 
-    yield fetchItems()
-    
+    yield put({
+      type: 'FETCH_ITEMS'
+    })
   } catch(error) {
-    console.log('Error in POST route', error)
+    console.log('Error in DELETE route', error)
   }
 }
 
 function* itemsSaga() {
-  yield takeLatest('FETCH_Items', fetchItems);
-  yield takeLatest('ADD_item', addItem);
-  yield takeLatest('DELETE_item', deleteItem);
+  yield takeLatest('FETCH_ITEMS', fetchItems);
+  yield takeLatest('ADD_ITEM', addItem);
+  yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default itemsSaga;

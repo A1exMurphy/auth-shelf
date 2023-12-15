@@ -7,16 +7,17 @@ import React from "react";
 function ShelfPage() {
   const shelfItems = useSelector((store) => store.shelf);
   // console.log(shelfItems, typeof shelfItems, "shelfItems from store")
+  console.log("mounting ShelfPage")
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchItems();
-  }, [shelfItems]);
+  }, [shelfItems.length]);
 
   const fetchItems = () => {
     // console.log("dispatch FETCH_Items")
     dispatch({
-      type: "FETCH_Items",
+      type: "FETCH_ITEMS",
     });
   };
   const [description, setDescription] = useState("");
@@ -26,7 +27,7 @@ function ShelfPage() {
     e.preventDefault();
     //  function is sending the new item details to the store..
     dispatch({
-      type: "ADD_item",
+      type: "ADD_ITEM",
       payload: { description: description, image_url: imageLink },
     });
     setDescription('');
@@ -36,7 +37,15 @@ function ShelfPage() {
   const deleteItem = ({item}) => {
     console.log(item, "item from  delete button")
     dispatch({
-      type: "DELETE_item",
+      type: "DELETE_ITEM",
+      payload: `${item.id}`
+    })
+  }
+
+  const editItem = ({item}) => {
+    console.log(item, "item selected for update")
+    dispatch({
+      type: "EDIT_ITEM",
       payload: `${item.id}`
     })
   }
@@ -57,6 +66,7 @@ function ShelfPage() {
                 <li>{item.description}</li>
                 <img src={item.image_url} />
                 <button onClick={() => deleteItem({item})}>Remove</button>
+                <span><button onClick={() => editItem({item})}>Edit</button></span>
               </div>
             );
           })}
