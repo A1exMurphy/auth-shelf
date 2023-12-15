@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-  console.log('start GET query');
+  console.log('start DELETE query');
 
   const submitDeleteItem = 
     `
@@ -78,9 +78,28 @@ router.delete('/:id', (req, res) => {
  * Update an item if it's something the logged in user added
  */
 router.put('/:id', (req, res) => {
-  // endpoint functionality
-});
+  console.log('start PUT query', req.user, '= req.user');
 
+  const submitUpdateItem = 
+    `
+    UPDATE "item" 
+    	SET "description"=$2, "image_url"=$3
+      WHERE "item"."id" = $1;
+    `
+    itemToUpdateValues = [req.params.id, req.user.description, req.user.image_url]
+    console.log(itemToUpdateValues, "item ID and values to update");
+
+    pool.query(submitUpdateItem, itemToUpdateValues)
+    .then((result) => {
+      // console.log(result.rows, "query response to GET")
+      res.send(result.rows)
+    })
+    .catch((err) => {
+      console.log(err, "error in PUT query")
+      res.sendStatus(500)
+    })
+    });
+    
 /**
  * Return all users along with the total number of items
  * they have added to the shelf
